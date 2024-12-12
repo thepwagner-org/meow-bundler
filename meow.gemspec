@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'Meow provides a simple way to validate whether a given string represents a valid cat sound in various languages including English, Japanese, Korean, Chinese, Spanish, German, French, and Russian.'
   spec.homepage      = 'https://github.com/thepwagner-org/meow-bundler'
   spec.license       = 'MIT'
-  spec.required_ruby_version = '>= 2.5.0'
+  spec.required_ruby_version = '>= 3.3'
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage
