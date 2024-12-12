@@ -21,4 +21,4 @@ jobs:
         run: bundle install
 
       - name: Run tests
-        run: ruby -Ilib:test test/meow_test.rb
+        run: rake test

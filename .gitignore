@@ -1,2 +1,5 @@
 /dev.yml
 /*.gem
+/pkg
+
+lib/version.rb
