@@ -1,0 +1,34 @@
+name: Publish Gem
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@2a18b06812b0e15bb916e1df298d3e740422c47e # v1.203.0
+        with:
+          bundler-cache: true
+      - name: Update version.rb
+        run: |
+          version="${GH_VERSION#v}"
+          if ! ruby -e "require 'rubygems'; Gem::Version.new('$version')"; then
+            echo "Error: Invalid version string '$version'"
+            exit 1
+          fi
+          sed -i "s/VERSION = '.*'/VERSION = '${version}'/" lib/version.rb
+        env:
+          GH_VERSION: ${{ github.event.release.tag_name }}
+      - name: Build gem
+        run: gem build meow.gemspec
+      # TODO: push gem to rubygems
+      # - name: Release gem
+      #   uses: rubygems/release-gem@9e85cb11501bebc2ae661c1500176316d3987059 # v1.1.0
+
