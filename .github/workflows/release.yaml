@@ -4,8 +4,14 @@ on:
     types: [created]
 
 permissions:
-  contents: read
+  # for uploading artifacts to GitHub release
+  contents: write
+
+  # for trusted publishing and attest-build-provenance
   id-token: write
+
+  # for attest-build-provenance
+  attestations: write
 
 jobs:
   release:
