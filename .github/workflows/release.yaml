@@ -30,6 +30,8 @@ jobs:
             exit 1
           fi
           sed -i "s/VERSION = '.*'/VERSION = '${version}'/" lib/version.rb
+
+          git update-index --skip-worktree lib/version.rb
         env:
           GH_VERSION: ${{ github.event.release.tag_name }}
 
