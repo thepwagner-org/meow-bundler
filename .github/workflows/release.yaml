@@ -38,4 +38,16 @@ jobs:
       - name: 🚀 Publish to rubygems
         uses: rubygems/release-gem@9e85cb11501bebc2ae661c1500176316d3987059 # v1.1.0
 
+      - name: 🔐 Generate Build Provenance
+        uses: actions/attest-build-provenance@7668571508540a607bdfd90a87a560489fe372eb # v2.1.0
+        with:
+          subject-path: "pkg/*"
 
+      - name: 📥 Upload to GitHub
+        run: |
+          for file in pkg/*; do
+            gh release upload "${GH_VERSION}" "$file"
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_VERSION: ${{ github.event.release.tag_name }}
